@@ -1,8 +1,10 @@
 import { Enemy } from './Enemy.js';
 
-let screamAudio = new Audio("audio/moggado.mp3");
+let AuraAttackAudio = new Audio("audio/moggado.mp3");
 let deathAudio = new Audio("audio/sadAudio.mp3");
-let painKick = new Audio("audio/kickaudio.mp3");
+let painKickAudio = new Audio("audio/kickaudio.mp3");
+let PunchAudio = new Audio("audio/PunchAudio.mp3");
+let ComboAudio = new Audio("Audio/ComboAudio.mp3")
 
 function resetEnemyFace(){
     imageEnemyFace.src = "img/Padrão.gif";
@@ -18,14 +20,15 @@ function resuscitate(inimigo) {
     inimigo.setisDead = false;
 }
 
-function attackEnemy(inimigo) {
 
-    inimigo.setLife = inimigo.getLife - 20
+function attackBase (inimigo, attack, facesrc, audio) {
+
+    inimigo.setLife = inimigo.getLife - attack
     divLifeBar.style.width = inimigo.getLife + "px";
 
     if(inimigo.getLife <= 0) {
 
-        imageEnemyFace.src = "img/dead.png";
+        imageEnemyFace.src = "img/death.gif";
 
         if(!inimigo.getisDead) {
             deathAudio.play();
@@ -38,48 +41,49 @@ function attackEnemy(inimigo) {
 
     }
     else {
+        
+        imageEnemyFace.src = facesrc; 
+        setTimeout(() => audio.play(), 400);
 
-        imageEnemyFace.src = "img/aura.gif"; 
-        setTimeout(() => screamAudio.play(), 400);
-
-        setTimeout(resetEnemyFace, 2500);
+        setTimeout(resetEnemyFace, 3000);
 
     }
+
+}
+
+function AuraattackEnemy(inimigo) {
+
+    let attack = 10;
+
+    attackBase(inimigo, attack, "img/aura.gif", AuraAttackAudio)
 
 }
 
 function KickAttackEnemy (inimigo) {
 
-    inimigo.setLife = inimigo.getLife - 40
-    divLifeBar.style.width = inimigo.getLife + "px";
+    let Kickattack = 40;
 
-    if(inimigo.getLife <= 0) {
-
-        imageEnemyFace.src = "img/dead.png";
-
-        if(!inimigo.getisDead) {
-            deathAudio.play();
-            inimigo.setisDead = true;
-
-            setTimeout(() => {
-                resuscitate(inimigo);
-            }, 5000);
-        }
-
-    }
-    else {
-
-        imageEnemyFace.src = "img/kick.gif"; 
-        setTimeout(() => painKick.play(), 400);
-
-        setTimeout(resetEnemyFace, 2500);
-
-    }
+    attackBase(inimigo, Kickattack, "img/kick.gif", painKickAudio)
 }
 
+function PunchAttackEnemy (inimigo) {
+
+    let PunchAttack = 30;
+
+    attackBase(inimigo, PunchAttack, "img/Punch.gif", PunchAudio)
+}
+
+function ComboAttackEnemy (inimigo) {
+
+    let ComboAttack = 50;
+
+    attackBase(inimigo, ComboAttack, "img/Combo.gif", ComboAudio)
+}
 
 let inimigo = new Enemy(200);
-buttonAttackEnemy.onclick = () => attackEnemy(inimigo);
+buttonAttackEnemy.onclick = () => AuraattackEnemy(inimigo);
 buttonKickAttack.onclick = () => KickAttackEnemy(inimigo);
+buttonPunchAttack.onclick = () => PunchAttackEnemy(inimigo);
+buttonComboAttack.onclick = () => ComboAttackEnemy(inimigo);
 
 //buttonAttackEnemy.onclick = attackEnemy(inimigo);
