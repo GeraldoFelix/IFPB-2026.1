@@ -1,0 +1,25 @@
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+body { background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
+.container { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+h1 { text-align: center; color: #333; margin-top: 0; }
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; color: #555; font-weight: bold; }
+.form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+.seats-container { margin: 20px 0; text-align: center; }
+.seats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; justify-content: center; margin-top: 10px; }
+.seat { padding: 15px 0; background: #e0e0e0; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+.seat:hover:not(.booked) { background: #b3d4ff; }
+.seat.selected { background: #007bff; color: #fff; }
+.seat.booked { background: #dc3545; color: #fff; cursor: not-allowed; opacity: 0.7; }
+.actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+button { padding: 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
+.btn-primary { background: #28a745; color: white; }
+.btn-primary:hover { background: #218838; }
+.btn-secondary { background: #17a2b8; color: white; }
+.btn-secondary:hover { background: #138496; }
+.btn-outline { background: transparent; border: 2px solid #6c757d; color: #6c757d; }
+.btn-outline:hover { background: #6c757d; color: white; }
+.msg { margin-top: 15px; text-align: center; font-weight: bold; padding: 10px; border-radius: 4px; display: none; }
+.msg.success { background: #d4edda; color: #155724; display: block; }
+.msg.error { background: #f8d7da; color: #721c24; display: block; }
+.msg.info { background: #d1ecf1; color: #0c5460; display: block; }
